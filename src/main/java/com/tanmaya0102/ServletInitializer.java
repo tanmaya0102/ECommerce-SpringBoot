@@ -1,4 +1,4 @@
-package com.tanmaya0102.ecommerce;
+package com.tanmaya0102;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
