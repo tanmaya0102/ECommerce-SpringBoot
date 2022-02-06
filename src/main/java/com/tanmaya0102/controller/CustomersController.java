@@ -6,10 +6,7 @@ import com.tanmaya0102.service.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,5 +38,17 @@ public class CustomersController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
 
+    }
+
+    @GetMapping("/checkCustomer")
+    public ResponseEntity<String> checkCustomer(@RequestParam String customer_id, @RequestParam String password)
+    {
+        if(customersService.checkCustomer(customer_id,password))
+        {
+            return ResponseEntity.status(HttpStatus.OK).body("Customer Authenticated");
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Incorrect CustomerId or Password");
+        }
     }
 }

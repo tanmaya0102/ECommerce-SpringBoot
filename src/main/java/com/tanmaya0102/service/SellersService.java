@@ -8,4 +8,5 @@ import java.util.List;
 public interface SellersService {
     List<Sellers> findAll();
     String registerSeller(Sellers sellers, SellerReq sellerReq);
+    Boolean checkSeller(String seller_id,String password);
 }

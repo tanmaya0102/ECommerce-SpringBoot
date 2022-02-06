@@ -28,5 +28,12 @@ public class SellerServiceImpl implements SellersService {
         sellersRepository.save(sellers);
         return "Seller Registered";
     }
+
+    @Override
+    public Boolean checkSeller(String seller_id,String password) {
+
+        Object seller=sellersRepository.sellerAuth(seller_id,password);
+        return seller != null;
+    }
 }
 

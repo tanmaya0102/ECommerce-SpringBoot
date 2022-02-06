@@ -39,4 +39,16 @@ public class SellersController {
        return ResponseEntity.status(HttpStatus.CREATED).body(res);
 
     }
+
+    @GetMapping("/checkSeller")
+    public ResponseEntity<String> checkSeller(@RequestParam String seller_id,@RequestParam String password)
+    {
+        if(sellersService.checkSeller(seller_id,password))
+        {
+            return ResponseEntity.status(HttpStatus.OK).body("Seller Authenticated");
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Incorrect SellerId or Password");
+        }
+    }
 }

@@ -27,4 +27,10 @@ public class CustomersServiceImpl implements CustomersService {
         customersRepository.save(customers);
         return "Customer Registered";
     }
+
+    @Override
+    public Boolean checkCustomer(String customer_id, String password) {
+        Object customer=customersRepository.customerAuth(customer_id,password);
+        return customer != null;
+    }
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface CustomersService {
     List<Customers> findAll();
     String registerCustomer(Customers customers, CustomerReq customerReq);
+    Boolean checkCustomer(String customer_id,String password);
 }
