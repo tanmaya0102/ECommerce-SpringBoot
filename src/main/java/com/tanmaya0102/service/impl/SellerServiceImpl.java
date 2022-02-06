@@ -1,8 +1,11 @@
 package com.tanmaya0102.service.impl;
 
 
+import com.tanmaya0102.dao.Products;
 import com.tanmaya0102.dao.Sellers;
+import com.tanmaya0102.repository.ProductsRepository;
 import com.tanmaya0102.repository.SellersRepository;
+import com.tanmaya0102.request.ProductReq;
 import com.tanmaya0102.request.SellerReq;
 import com.tanmaya0102.service.SellersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,9 @@ import java.util.List;
 public class SellerServiceImpl implements SellersService {
     @Autowired
     private SellersRepository sellersRepository;
+
+    @Autowired
+    private ProductsRepository productsRepository;
 
     @Override
     public List<Sellers> findAll() {
@@ -34,6 +40,25 @@ public class SellerServiceImpl implements SellersService {
 
         Object seller=sellersRepository.sellerAuth(seller_id,password);
         return seller != null;
+    }
+
+    @Override
+    public String addProducts(String seller_id,String password,Products products, ProductReq productReq) {
+        if(checkSeller(seller_id,password))
+        {
+            products.setProduct_id(productReq.getProduct_id());
+            products.setProduct_name(productReq.getProduct_name());
+            products.setSeller_id(productReq.getSeller_id());
+            products.setProduct_description(productReq.getProduct_description());
+            products.setPrice(productReq.getPrice());
+            products.setQuantity(productReq.getQuantity());
+            products.setStatus(productReq.getStatus());
+            productsRepository.save(products);
+            return "Product is added";
+        }
+        else{
+            return "Error Occurred";
+        }
     }
 }
 

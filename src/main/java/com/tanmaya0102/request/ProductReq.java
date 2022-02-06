@@ -6,7 +6,6 @@ public class ProductReq implements Serializable {
     private static final long serialVersionUID = 2254246194349014572L;
     private String product_id;
     private String seller_id;
-    private String password;
     private String product_name;
     private String product_description;
     private Float price;
@@ -28,10 +27,6 @@ public class ProductReq implements Serializable {
     public void setSeller_id(String seller_id) {
         this.seller_id = seller_id;
     }
-
-    public String getPassword() { return password; }
-
-    public void setPassword(String password) { this.password = password; }
 
     public String getProduct_name() {
         return product_name;

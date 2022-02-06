@@ -14,4 +14,5 @@ public interface SellersRepository extends JpaRepository<Sellers,Long> {
 
     @Query("SELECT seller_id from Sellers where seller_id=:seller_id and password=:password")
     Object sellerAuth(@Param("seller_id") String seller_id,@Param("password") String password);
+
 }
