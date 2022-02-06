@@ -1,34 +1,15 @@
-package com.tanmaya0102.dao;
+package com.tanmaya0102.request;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name="customers")
-public class Customers implements Serializable {
+public class CustomerReq implements Serializable {
+    private static final long serialVersionUID = 3953322116230627858L;
 
-    private static final long serialVersionUID = 1967562370911425136L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private Long id;
-
-    @Column(name="customer_id")
     private String customer_id;
 
-    @Column(name="customer_name")
     private String customer_name;
 
-    @Column(name="password")
     private String password;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getCustomer_id() {
         return customer_id;
@@ -53,6 +34,5 @@ public class Customers implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
 }

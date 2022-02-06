@@ -1,12 +1,14 @@
 package com.tanmaya0102.controller;
 
 import com.tanmaya0102.dao.Customers;
-import com.tanmaya0102.dao.Products;
+import com.tanmaya0102.request.CustomerReq;
 import com.tanmaya0102.service.CustomersService;
-import com.tanmaya0102.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,5 +24,22 @@ public class CustomersController {
     {
         List<Customers> customersList=customersService.findAll();
         return ResponseEntity.ok().body(customersList);
+    }
+
+    @PostMapping("/registerCustomer")
+    public ResponseEntity<String> registerCustomer(@RequestBody CustomerReq customerReq)
+    {
+        Customers customers = new Customers();
+        String res;
+        try{
+            res=customersService.registerCustomer(customers,customerReq);
+        }
+        catch(Exception e)
+        {
+            res= HttpStatus.INTERNAL_SERVER_ERROR.toString();
+
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(res);
+
     }
 }
