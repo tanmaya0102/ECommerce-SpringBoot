@@ -63,5 +63,44 @@ public class SellersController {
 
     }
 
+    @GetMapping("/viewProductsListed")
+    public ResponseEntity<List<Object>> viewProduct(@RequestParam String seller_id, @RequestParam String password)
+    {
+        List<Object> productReqList;
+        productReqList=sellersService.viewProducts(seller_id,password);
+        return ResponseEntity.status(HttpStatus.OK).body(productReqList);
+
+    }
+    
+    @DeleteMapping("/deleteProduct")
+    public ResponseEntity<String> deleteProduct(@RequestParam String seller_id, @RequestParam String password,@RequestParam String product_id)
+    {
+        String res = "Error Occured";
+        try
+        {
+            res=sellersService.deleteProduct(seller_id,password,product_id);
+            return ResponseEntity.ok().body(res);
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.internalServerError().body(res);
+        }
+    }
+    @PatchMapping("/updateProduct")
+    public ResponseEntity<String> updateProduct(@RequestParam String seller_id, @RequestParam String password,@RequestParam String product_id,
+                                                @RequestParam("price") Float price,@RequestParam("quantity")Integer quantity,@RequestParam("status") Boolean status)
+    {
+        String res = "Error Occured";
+        try
+        {
+            res=sellersService.updateProduct(seller_id,password,product_id,price,quantity,status);
+            return ResponseEntity.ok().body(res);
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.internalServerError().body(res);
+        }
+    }
+
 
 }

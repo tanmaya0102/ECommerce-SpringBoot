@@ -60,5 +60,42 @@ public class SellerServiceImpl implements SellersService {
             return "Error Occurred";
         }
     }
+
+    @Override
+    public List<Object> viewProducts(String seller_id, String password) {
+        if(checkSeller(seller_id,password))
+        {   List<Object> productReqList;
+            productReqList=productsRepository.viewProducts(seller_id);
+            return productReqList;
+        }
+        else{
+            return null;
+        }
+    }
+
+    @Override
+    public String deleteProduct(String seller_id, String password, String product_id) {
+        if(checkSeller(seller_id,password))
+        {   int integer;
+            integer=productsRepository.deleteProduct(seller_id,product_id);
+            return integer+" product deleted";
+        }
+        else{
+            return "Error Occurred";
+        }
+
+    }
+
+    @Override
+    public String updateProduct(String seller_id, String password, String product_id, Float price, Integer quantity, Boolean status) {
+        if(checkSeller(seller_id,password))
+        {   int integer;
+            integer=productsRepository.updateProduct(seller_id,product_id,price,quantity,status);
+            return integer+" product updated";
+        }
+        else{
+            return "Error Occurred";
+        }
+    }
 }
 
