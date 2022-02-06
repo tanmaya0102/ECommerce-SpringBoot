@@ -51,4 +51,13 @@ public class CustomersController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Incorrect CustomerId or Password");
         }
     }
+
+    @GetMapping("/displayProducts")
+    public ResponseEntity<List<Object>> displayProduct(@RequestParam String customer_id, @RequestParam String password)
+    {
+        List<Object> productList;
+        productList=customersService.displayProducts(customer_id,password);
+        return ResponseEntity.status(HttpStatus.OK).body(productList);
+
+    }
 }

@@ -2,6 +2,7 @@ package com.tanmaya0102.service.impl;
 
 import com.tanmaya0102.dao.Customers;
 import com.tanmaya0102.repository.CustomersRepository;
+import com.tanmaya0102.repository.ProductsRepository;
 import com.tanmaya0102.request.CustomerReq;
 import com.tanmaya0102.service.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import java.util.List;
 public class CustomersServiceImpl implements CustomersService {
     @Autowired
     private CustomersRepository customersRepository;
+
+    @Autowired
+    private ProductsRepository productsRepository;
 
     @Override
     public List<Customers> findAll() {
@@ -32,5 +36,18 @@ public class CustomersServiceImpl implements CustomersService {
     public Boolean checkCustomer(String customer_id, String password) {
         Object customer=customersRepository.customerAuth(customer_id,password);
         return customer != null;
+    }
+
+    @Override
+    public List<Object> displayProducts(String customer_id, String password)
+    {
+        if(checkCustomer(customer_id,password))
+        {   List<Object> productList;
+            productList=productsRepository.displayProducts();
+            return productList;
+        }
+        else{
+            return null;
+        }
     }
 }

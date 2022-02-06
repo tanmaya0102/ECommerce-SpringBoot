@@ -26,4 +26,7 @@ public interface ProductsRepository extends JpaRepository<Products,Long> {
     int updateProduct(@RequestParam("seller_id") String seller_id,@RequestParam("product_id") String product_id,
                       @RequestParam("price") Float price,@RequestParam("quantity")Integer quantity,
                       @RequestParam("status") Boolean status);
+
+    @Query("SELECT product_id,product_name,product_description,price FROM Products WHERE status=true")
+    List<Object> displayProducts();
 }
