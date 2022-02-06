@@ -1,9 +1,6 @@
 package com.tanmaya0102.dao;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -11,6 +8,8 @@ import java.io.Serializable;
 public class Products implements Serializable{
     private static final long serialVersionUID = -1162284582532726128L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
     @Column(name="product_id")
