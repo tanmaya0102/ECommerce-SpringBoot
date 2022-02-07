@@ -60,4 +60,32 @@ public class CustomersController {
         return ResponseEntity.status(HttpStatus.OK).body(productList);
 
     }
+
+    @GetMapping("/displayProductDetail")
+    public ResponseEntity<List<Object>> displayProductDetail(@RequestParam String customer_id, @RequestParam String password,@RequestParam String product_id)
+    {
+        List<Object> productList;
+        productList=customersService.displayProductDetail(customer_id,password,product_id);
+        return ResponseEntity.status(HttpStatus.OK).body(productList);
+
+    }
+
+    @GetMapping("/addToCart")
+    public ResponseEntity<String> addtoCart(@RequestParam String customer_id, @RequestParam String password,@RequestParam String product_id)
+    {
+        String res;
+        res=customersService.addtoCart(customer_id,password,product_id);
+        return ResponseEntity.status(HttpStatus.OK).body(res);
+
+    }
+
+
+    @GetMapping("/viewCart")
+    public ResponseEntity<List<Object>> viewCart(@RequestParam String customer_id, @RequestParam String password)
+    {
+        List<Object> cartList;
+        cartList=customersService.viewCart(customer_id,password);
+        return ResponseEntity.status(HttpStatus.OK).body(cartList);
+
+    }
 }

@@ -29,4 +29,7 @@ public interface ProductsRepository extends JpaRepository<Products,Long> {
 
     @Query("SELECT product_id,product_name,product_description,price FROM Products WHERE status=true")
     List<Object> displayProducts();
+
+    @Query("SELECT p.product_id,p.product_name,p.product_description,p.price,s.seller_name FROM Products p join Sellers s on s.seller_id=p.seller_id where p.product_id=:product_id")
+    List<Object> displayProductDetail(@RequestParam("product_id") String product_id);
 }

@@ -10,4 +10,7 @@ public interface CustomersService {
     String registerCustomer(Customers customers, CustomerReq customerReq);
     Boolean checkCustomer(String customer_id,String password);
     List<Object> displayProducts(String customer_id, String password);
+    List<Object> displayProductDetail(String customer_id, String password,String product_id);
+    String addtoCart(String customer_id, String password,String product_id);
+    List<Object> viewCart(String customer_id,String password);
 }
