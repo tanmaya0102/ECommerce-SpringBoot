@@ -13,4 +13,6 @@ public interface CustomersService {
     List<Object> displayProductDetail(String customer_id, String password,String product_id);
     String addtoCart(String customer_id, String password,String product_id);
     List<Object> viewCart(String customer_id,String password);
+    List<Object> viewOrders(String customer_id,String password);
+    String buyProducts(String customer_id,String password);
 }

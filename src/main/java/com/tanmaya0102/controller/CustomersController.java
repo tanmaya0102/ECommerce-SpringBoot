@@ -88,4 +88,20 @@ public class CustomersController {
         return ResponseEntity.status(HttpStatus.OK).body(cartList);
 
     }
+    @GetMapping("/viewOrders")
+    public ResponseEntity<List<Object>> viewOrders(@RequestParam String customer_id, @RequestParam String password)
+    {
+        List<Object> orderList;
+        orderList=customersService.viewOrders(customer_id,password);
+        return ResponseEntity.status(HttpStatus.OK).body(orderList);
+
+    }
+    @GetMapping("/buyProducts")
+    public ResponseEntity<String> buyProducts(@RequestParam String customer_id, @RequestParam String password)
+    {
+        String res;
+        res=customersService.buyProducts(customer_id,password);
+        return ResponseEntity.status(HttpStatus.OK).body(res);
+
+    }
 }

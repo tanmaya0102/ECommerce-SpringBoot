@@ -1,10 +1,7 @@
 package com.tanmaya0102.service.impl;
 
 import com.tanmaya0102.dao.Customers;
-import com.tanmaya0102.repository.CartsRepository;
-import com.tanmaya0102.repository.CustomersRepository;
-import com.tanmaya0102.repository.ProductsRepository;
-import com.tanmaya0102.repository.ReviewsRepository;
+import com.tanmaya0102.repository.*;
 import com.tanmaya0102.request.CustomerReq;
 import com.tanmaya0102.service.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +22,9 @@ public class CustomersServiceImpl implements CustomersService {
 
     @Autowired
     private CartsRepository cartsRepository;
+
+    @Autowired
+    private SalesRepository salesRepository;
 
     @Override
     public List<Customers> findAll() {
@@ -90,6 +90,39 @@ public class CustomersServiceImpl implements CustomersService {
         if (checkCustomer(customer_id, password)) {
             res = cartsRepository.viewCart(customer_id);
             return res;
+        }
+        else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Object> viewOrders(String customer_id, String password) {
+        List<Object> res;
+        if (checkCustomer(customer_id, password)) {
+            res = salesRepository.viewOrder(customer_id);
+            return res;
+        }
+        else {
+            return null;
+        }
+
+    }
+
+    @Override
+    public String buyProducts(String customer_id, String password) {
+        List<String> productList;
+        int count=0,c;
+        if (checkCustomer(customer_id, password)) {
+            productList = cartsRepository.getCart(customer_id);
+            for(int i=0;i<productList.size();i++)
+            {
+                c= salesRepository.addtoSale(productList.get(i),customer_id);
+                cartsRepository.updateCart(productList.get(i),customer_id);
+                productsRepository.updateProductQuantity(productList.get(i));
+                count+=c;
+            }
+           return count +" products are bought";
         }
         else {
             return null;

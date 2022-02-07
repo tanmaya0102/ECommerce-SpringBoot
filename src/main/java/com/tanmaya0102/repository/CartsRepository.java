@@ -22,4 +22,13 @@ public interface CartsRepository extends JpaRepository<Carts,Long> {
     @Query("SELECT c.product_id,p.product_name,p.price FROM Carts c INNER JOIN Products p on p.product_id=c.product_id WHERE c.bought=false AND c.customer_id=:customer_id")
     List<Object> viewCart(@RequestParam("customer_id") String customer_id);
 
+    @Query("SELECT product_id FROM Carts WHERE customer_id=:customer_id AND bought=false")
+    List<String> getCart(@RequestParam("customer_id") String customer_id);
+
+    @Modifying
+    @Query("update Carts set bought=true where product_id=:product_id and customer_id=:customer_id")
+    void updateCart(@RequestParam("product_id") String product_id,@RequestParam("customer_id") String customer_id);
+
+
+
 }
